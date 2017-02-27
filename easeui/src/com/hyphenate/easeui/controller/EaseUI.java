@@ -249,6 +249,8 @@ public final class EaseUI {
          * @return
          */
         EaseUser getUser(String username);
+
+        User getAppUser(String username);
     }
     
     /**
