@@ -19,7 +19,7 @@ import cn.ucai.live.ui.widget.BarrageLayout;
 import cn.ucai.live.utils.Utils;
 
 import com.bumptech.glide.Glide;
-import cn.ucai.live.DemoConstants;
+import cn.ucai.live.LiveConstants;
 import cn.ucai.live.R;
 import cn.ucai.live.data.TestAvatarRepository;
 import cn.ucai.live.ui.widget.LiveLeftGiftView;
@@ -242,7 +242,7 @@ public abstract class LiveBaseActivity extends BaseActivity {
         }
         // 如果是当前会话的消息，刷新聊天页面
         if (username.equals(chatroomId)) {
-          if (message.getBooleanAttribute(DemoConstants.EXTRA_IS_BARRAGE_MSG, false)) {
+          if (message.getBooleanAttribute(LiveConstants.EXTRA_IS_BARRAGE_MSG, false)) {
             barrageLayout.addBarrage(((EMTextMessageBody) message.getBody()).getMessage(),
                 message.getFrom());
           }
@@ -263,7 +263,7 @@ public abstract class LiveBaseActivity extends BaseActivity {
 
     @Override public void onCmdMessageReceived(List<EMMessage> messages) {
       EMMessage message = messages.get(messages.size() - 1);
-      if (DemoConstants.CMD_GIFT.equals(((EMCmdMessageBody) message.getBody()).action())) {
+      if (LiveConstants.CMD_GIFT.equals(((EMCmdMessageBody) message.getBody()).action())) {
         showLeftGiftVeiw(message.getFrom());
       }
     }
@@ -295,7 +295,7 @@ public abstract class LiveBaseActivity extends BaseActivity {
           @Override public void onMessageSend(String content) {
             EMMessage message = EMMessage.createTxtSendMessage(content, chatroomId);
             if (messageView.isBarrageShow) {
-              message.setAttribute(DemoConstants.EXTRA_IS_BARRAGE_MSG, true);
+              message.setAttribute(LiveConstants.EXTRA_IS_BARRAGE_MSG, true);
               barrageLayout.addBarrage(content, EMClient.getInstance().getCurrentUser());
             }
             message.setChatType(EMMessage.ChatType.ChatRoom);
@@ -435,7 +435,7 @@ public abstract class LiveBaseActivity extends BaseActivity {
   @OnClick(R.id.present_image) void onPresentImageClick() {
     EMMessage message = EMMessage.createSendMessage(EMMessage.Type.CMD);
     message.setReceipt(chatroomId);
-    EMCmdMessageBody cmdMessageBody = new EMCmdMessageBody(DemoConstants.CMD_GIFT);
+    EMCmdMessageBody cmdMessageBody = new EMCmdMessageBody(LiveConstants.CMD_GIFT);
     message.addBody(cmdMessageBody);
     message.setChatType(EMMessage.ChatType.ChatRoom);
     EMClient.getInstance().chatManager().sendMessage(message);
