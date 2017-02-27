@@ -2,47 +2,51 @@ apply plugin: 'com.android.application'
 apply plugin: 'com.neenbedankt.android-apt'
 
 android {
-  compileSdkVersion 23
-  buildToolsVersion "23.0.3"
+    compileSdkVersion 23
+    buildToolsVersion "23.0.3"
 
-  defaultConfig {
-    applicationId "cn.ucai.live"
-    minSdkVersion 15
-    targetSdkVersion 22
-    versionCode 1
-    versionName "1.0"
+    defaultConfig {
+        applicationId "cn.ucai.live"
+        minSdkVersion 15
+        targetSdkVersion 22
+        versionCode 1
+        versionName "1.0"
 //    ndk {
 //      abiFilter 'armeabi'
 //    }
-  }
-  buildTypes {
-    release {
-      minifyEnabled false
-      proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
     }
-  }
-  lintOptions {
-    checkReleaseBuilds false
-    // Or, if you prefer, you can continue to check for errors in release builds,
-    // but continue the build even when errors are found:
-    abortOnError false
-  }
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+    }
+    lintOptions {
+        checkReleaseBuilds false
+        // Or, if you prefer, you can continue to check for errors in release builds,
+        // but continue the build even when errors are found:
+        abortOnError false
+    }
 }
 
 dependencies {
-  compile fileTree(dir: 'libs', include: ['*.jar'])
-  testCompile 'junit:junit:4.12'
-  compile(project(':easeui')) {
-    exclude module: 'support-v4'
-  }
-  compile(project(':ulive-android-sdk')) {
-    exclude module: 'support-v4'
-  }
+    compile fileTree(dir: 'libs', include: ['*.jar'])
+    testCompile 'junit:junit:4.12'
+    compile(project(':easeui')) {
+        exclude module: 'support-v4'
+    }
+    compile(project(':ulive-android-sdk')) {
+        exclude module: 'support-v4'
+    }
 
-  apt 'com.jakewharton:butterknife-compiler:8.0.1'
-  compile 'com.android.support:appcompat-v7:23.4.0'
-  compile 'com.android.support:design:23.4.0'
-  compile 'com.jakewharton:butterknife:8.0.1'
-  compile 'com.github.florent37:viewanimator:1.0.4'
-  compile 'com.android.support:support-v4:23.4.0'
+    apt 'com.jakewharton:butterknife-compiler:8.0.1'
+    compile 'com.android.support:appcompat-v7:23.4.0'
+    compile 'com.android.support:design:23.4.0'
+    compile 'com.jakewharton:butterknife:8.0.1'
+    compile 'com.github.florent37:viewanimator:1.0.4'
+    compile 'com.android.support:support-v4:23.4.0'
+    compile 'com.squareup.okhttp3:okhttp:3.4.1'
+    compile 'com.squareup.okio:okio:1.10.0'
+    compile 'com.squareup.okhttp3:okhttp-urlconnection:3.4.1'
+    compile 'com.google.code.gson:gson:2.7'
 }
