@@ -8,7 +8,7 @@ public class Result implements Serializable {
 	private Object retData;
 	public Result() {
 	}
-	public Result(boolean retMsg,int retCode){
+	public Result(boolean retMsg, int retCode){
 		this.retMsg = retMsg;
 		this.retCode = retCode;
 	}

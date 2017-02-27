@@ -19,9 +19,9 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
 
-import cn.ucai.superwechat.I;
-import cn.ucai.superwechat.SuperWeChatApplication;
-import cn.ucai.superwechat.utils.L;
+
+import cn.ucai.live.I;
+import cn.ucai.live.LiveApplication;
 import okhttp3.Cache;
 import okhttp3.Call;
 import okhttp3.Callback;
@@ -144,7 +144,7 @@ public class OkHttpUtils<T> {
 
 
     private void initHandler() {
-        mHandler = new Handler(SuperWeChatApplication.applicationContext.getMainLooper()) {
+        mHandler = new Handler(LiveApplication.getInstance().getMainLooper()) {
             @Override
             public void handleMessage(Message msg) {
                 switch (msg.what) {
