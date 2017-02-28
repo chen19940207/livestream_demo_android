@@ -52,7 +52,7 @@ public class MyProfileFragment extends Fragment {
         usernameView.setText(EMClient.getInstance().getCurrentUser());
 
 
-        EaseUserUtils.setAppGroupAvatar(getContext(), EMClient.getInstance().getCurrentUser(), ivAvatar);
+        EaseUserUtils.setAppUserAvatar(getContext(), EMClient.getInstance().getCurrentUser(), ivAvatar);
         EaseUserUtils.setAppUserNick(EMClient.getInstance().getCurrentUser(), usernameView);
 
         //liveSettings = new LiveSettings(getContext());
