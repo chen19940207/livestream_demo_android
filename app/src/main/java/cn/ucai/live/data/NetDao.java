@@ -3,7 +3,6 @@ package cn.ucai.live.data;
 import android.content.Context;
 
 import com.hyphenate.chat.EMGroup;
-import com.hyphenate.easeui.domain.User;
 
 import java.io.File;
 
@@ -160,5 +159,3 @@ public class NetDao {
                                 .execute(listener);
             }
 }
-
-
