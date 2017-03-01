@@ -110,9 +110,21 @@ public class StartLiveActivity extends LiveBaseActivity
         EaseUserUtils.setAppUserAvatar(StartLiveActivity.this, EMClient.getInstance().getCurrentUser(), eivAvatar);
         EaseUserUtils.setAppUserNick(EMClient.getInstance().getCurrentUser(), usernameView);
 
-        liveId = TestDataRepository.getLiveRoomId(EMClient.getInstance().getCurrentUser());
-        chatroomId = TestDataRepository.getChatRoomId(EMClient.getInstance().getCurrentUser());
-        anchorId = EMClient.getInstance().getCurrentUser();
+        String id = getIntent().getStringExtra("liveId");
+                if (id != null && !id.equals("")) {
+                        liveId = id;
+                        chatroomId = id;
+                        initEnv();
+                    } else {
+                        pd = new ProgressDialog(StartLiveActivity.this);
+                        pd.setMessage("创建直播...");
+                        pd.show();
+                        createLive();
+                    }
+
+//        liveId = TestDataRepository.getLiveRoomId(EMClient.getInstance().getCurrentUser());
+//        chatroomId = TestDataRepository.getChatRoomId(EMClient.getInstance().getCurrentUser());
+//        anchorId = EMClient.getInstance().getCurrentUser();
         usernameView.setText(anchorId);
         initEnv();
     }
@@ -205,7 +217,8 @@ public class StartLiveActivity extends LiveBaseActivity
         pd.show();
         createLive();
         //demo为了测试方便，只有指定的账号才能开启直播
-        if (liveId == null) {
+        if (liveId == null || liveId.equals("")) {
+                       CommonUtils.showShortToast("获取直播数据失败!");
 //            String[] anchorIds = TestDataRepository.anchorIds;
 //            StringBuilder sb = new StringBuilder();
 //            for (int i = 0; i < anchorIds.length; i++) {
@@ -215,6 +228,7 @@ public class StartLiveActivity extends LiveBaseActivity
 //            new EaseAlertDialog(this, "demo中只有" + sb.toString() + "这几个账户才能开启直播").show();
             return;
         }
+        startLiveByRoom();
     }
 
     private void startLiveByRoom() {
@@ -247,10 +261,11 @@ public class StartLiveActivity extends LiveBaseActivity
                 public void onSuccess(String s) {
                     boolean success = false;
                     if (s != null) {
-                        List<String> ids = ResultUtils.getEMResultFromJson(s, String.class);
-                        if (ids != null && ids.size() > 0) {
-                            initLive(ids.get(0));
-                            startLiveByRoom();
+                        String id = ResultUtils.getEMResultFromJson(s);
+                        if (id != null) {
+                            success = true;
+                            initLive(id);
+                                startLiveByRoom();
                         }
                     }
                     if (!success) {

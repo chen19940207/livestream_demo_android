@@ -271,8 +271,16 @@ public class LiveListFragment extends Fragment {
                 public void onClick(View v) {
                     final int position = holder.getAdapterPosition();
                     if (position == RecyclerView.NO_POSITION) return;
-                    context.startActivity(new Intent(context, LiveDetailsActivity.class)
-                            .putExtra("liveroom", liveRoomList.get(position)));
+//                    context.startActivity(new Intent(context, LiveDetailsActivity.class)
+//                            .putExtra("liveroom", liveRoomList.get(position)));
+                    LiveRoom rooom = liveRoomList.get(position);
+                                        if (rooom.getAnchorId().equals(EMClient.getInstance().getCurrentUser())) {
+                                                context.startActivity(new Intent(context, StartLiveActivity.class)
+                                                                .putExtra("liveId", rooom.getId()));
+                                            } else {
+                                                context.startActivity(new Intent(context, LiveDetailsActivity.class)
+                                                                .putExtra("liveroom", liveRoomList.get(position)));
+                                            }
                 }
             });
             return holder;
