@@ -5,56 +5,51 @@
     android:id="@+id/root_layout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.easemob.livedemo.cn.easemob.livedemo.ui.activity.StartLiveActivity"
-    >
+    tools:context="cn.ucai.live.ui.activity.StartLiveActivity">
 
   <com.ucloud.live.widget.UAspectFrameLayout
       android:id="@+id/container"
       android:layout_width="match_parent"
       android:layout_height="match_parent"
       android:layout_gravity="center"
-      android:background="@color/color_progress"
-      >
+      android:background="@color/color_progress">
 
   </com.ucloud.live.widget.UAspectFrameLayout>
 
-<!--  android:background="@drawable/live_title_gradient"-->
+  <!--  android:background="@drawable/live_title_gradient"-->
   <android.support.v7.widget.Toolbar
       android:id="@+id/toolbar"
-      android:background="@android:color/transparent"
-      app:titleTextColor="#fff"
       style="@style/ToolbarNormal"
-      >
+      android:background="@android:color/transparent"
+      app:titleTextColor="#fff">
 
     <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:gravity="center_vertical"
-        >
+        android:gravity="center_vertical">
+
       <com.hyphenate.easeui.widget.EaseImageView
+          android:id="@+id/eiv_avatar"
           android:layout_width="30dp"
           android:layout_height="30dp"
-          app:ease_shape_type="round"
           android:src="@drawable/ease_default_avatar"
-          />
+          app:ease_shape_type="round" />
 
       <TextView
           android:id="@+id/tv_username"
           android:layout_width="wrap_content"
           android:layout_height="wrap_content"
-          android:textSize="15sp"
           android:layout_marginLeft="10dp"
           android:text="usernmae"
           android:textColor="@color/common_white"
-          />
+          android:textSize="15sp" />
 
     </LinearLayout>
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:gravity="right|center_vertical"
-        >
+        android:gravity="right|center_vertical">
 
       <ImageButton
           android:id="@+id/img_bt_switch_voice"
@@ -62,24 +57,23 @@
           android:layout_height="wrap_content"
           android:layout_marginLeft="5dp"
           android:layout_marginRight="10dp"
-          android:background="@drawable/live_voice_switch_bg"
-          />
+          android:background="@drawable/live_voice_switch_bg" />
+
       <ImageButton
           android:id="@+id/img_bt_switch_light"
           android:layout_width="wrap_content"
           android:layout_height="wrap_content"
-          android:layout_marginRight="10dp"
           android:layout_marginLeft="5dp"
-          android:background="@drawable/live_light_switch_bg"
-          />
+          android:layout_marginRight="10dp"
+          android:background="@drawable/live_light_switch_bg" />
+
       <ImageButton
           android:id="@+id/img_bt_switch_camera"
           android:layout_width="wrap_content"
           android:layout_height="wrap_content"
-          android:layout_marginRight="10dp"
           android:layout_marginLeft="5dp"
-          android:background="@drawable/live_cam"
-          />
+          android:layout_marginRight="10dp"
+          android:background="@drawable/live_cam" />
 
       <ImageButton
           android:id="@+id/img_bt_close"
@@ -87,20 +81,18 @@
           android:layout_height="wrap_content"
           android:layout_marginLeft="5dp"
           android:layout_marginRight="15dp"
-          android:background="@drawable/live_close"
-          />
+          android:background="@drawable/live_close" />
     </LinearLayout>
   </android.support.v7.widget.Toolbar>
 
-  <include layout="@layout/room_user_list_layout"
+  <include
+      layout="@layout/room_user_list_layout"
       android:layout_width="match_parent"
       android:layout_height="wrap_content"
-      android:layout_below="@+id/toolbar"
-      />
+      android:layout_below="@+id/toolbar" />
 
 
-  <TextView
-      xmlns:android="http://schemas.android.com/apk/res/android"
+  <TextView xmlns:android="http://schemas.android.com/apk/res/android"
       android:id="@+id/countdown_txtv"
       android:layout_width="wrap_content"
       android:layout_height="wrap_content"
@@ -109,24 +101,21 @@
       android:textColor="@android:color/white"
       android:textSize="136.0sp"
       android:textStyle="bold"
-      android:visibility="gone"
-      />
+      android:visibility="gone" />
 
   <cn.ucai.live.ui.widget.RoomMessagesView
       android:id="@+id/message_view"
       android:layout_width="match_parent"
       android:layout_height="174dp"
       android:layout_alignParentBottom="true"
-      android:visibility="invisible"
-      />
+      android:visibility="invisible" />
 
   <cn.ucai.live.ui.widget.BarrageLayout
       android:id="@+id/barrage_layout"
       android:layout_width="match_parent"
       android:layout_height="wrap_content"
       android:layout_above="@id/message_view"
-      android:layout_marginBottom="10dp"
-      />
+      android:layout_marginBottom="10dp" />
 
   <cn.ucai.live.ui.widget.PeriscopeLayout
       android:id="@+id/periscope_layout"
@@ -134,8 +123,7 @@
       android:layout_height="190dp"
       android:layout_alignParentBottom="true"
       android:layout_alignParentRight="true"
-      android:layout_marginBottom="42dp"
-      />
+      android:layout_marginBottom="42dp" />
 
   <cn.ucai.live.ui.widget.LiveLeftGiftView
       android:id="@+id/left_gift_view1"
@@ -143,32 +131,29 @@
       android:layout_height="wrap_content"
       android:layout_above="@+id/left_gift_view2"
       android:layout_marginBottom="4dp"
-      android:visibility="invisible"
-      />
+      android:visibility="invisible" />
+
   <cn.ucai.live.ui.widget.LiveLeftGiftView
       android:id="@+id/left_gift_view2"
       android:layout_width="wrap_content"
       android:layout_height="wrap_content"
       android:layout_centerVertical="true"
       android:layout_marginBottom="5dp"
-      android:visibility="invisible"
-      />
+      android:visibility="invisible" />
 
   <include
-      layout="@layout/layout_live_bottom_bar"
       android:id="@+id/bottom_bar"
+      layout="@layout/layout_live_bottom_bar"
       android:layout_width="match_parent"
       android:layout_height="wrap_content"
       android:layout_alignParentBottom="true"
-      android:visibility="invisible"
-      />
+      android:visibility="invisible" />
 
   <RelativeLayout
       android:id="@+id/start_container"
       android:layout_width="match_parent"
       android:layout_height="wrap_content"
-      android:layout_alignParentBottom="true"
-      >
+      android:layout_alignParentBottom="true">
 
     <Button
         android:id="@+id/btn_start"
@@ -176,30 +161,26 @@
         android:layout_height="@dimen/button_normal_height"
         android:background="@drawable/common_black_btn_bg"
         android:text="开始直播"
-        android:textColor="#fff"
-        />
+        android:textColor="#fff" />
 
   </RelativeLayout>
 
   <RelativeLayout
+      android:id="@+id/message_container"
       android:layout_width="match_parent"
       android:layout_height="300dp"
-      android:id="@+id/message_container"
-      android:layout_alignParentBottom="true"
-      ></RelativeLayout>
+      android:layout_alignParentBottom="true"></RelativeLayout>
 
   <ImageView
       android:id="@+id/cover_image"
       android:layout_width="match_parent"
       android:layout_height="match_parent"
-      android:visibility="invisible"
       android:scaleType="fitXY"
-      />
+      android:visibility="invisible" />
 
   <ViewStub
+      android:id="@+id/finish_frame"
       android:layout_width="match_parent"
       android:layout_height="match_parent"
-      android:id="@+id/finish_frame"
-      android:layout="@layout/live_finish_layout"
-      />
+      android:layout="@layout/live_finish_layout" />
 </RelativeLayout>
