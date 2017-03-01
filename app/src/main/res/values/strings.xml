@@ -134,4 +134,5 @@
     <string name="setting_btn_exit">退出登录</string>
     <string name="title_activity_guide">GuideActivity</string>
     <string name="msg_1">msg_1</string>
+    <string name="now_refresh">刷新中...</string>
 </resources>

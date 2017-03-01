@@ -167,6 +167,8 @@ public class LiveListFragment extends Fragment {
             @Override
             public void onScrolled(RecyclerView recyclerView, int dx, int dy) {
                 super.onScrolled(recyclerView, dx, dy);
+                int firstPosition = gm.findFirstVisibleItemPosition();
+                mSrl.setEnabled(firstPosition == 0);
             }
         });
     }
@@ -187,12 +189,14 @@ public class LiveListFragment extends Fragment {
                     getActivity().runOnUiThread(new Runnable() {
 
                         public void run() {
+                            mSrl.setRefreshing(false);
+                            mtvRefresh.setVisibility(View.GONE);
                             chatRoomList.addAll(chatRooms);
                             if (chatRooms.size() != 0) {
                                 cursor = result.getCursor();
-//                                if (chatRooms.size() == pagesize) {
-//                                    footLoadingLayout.setVisibility(View.VISIBLE);
-//                                }
+                                if (chatRooms.size() == pagesize) {
+                                    footLoadingLayout.setVisibility(View.VISIBLE);
+                                }
                             }
                             if (isFirstLoading) {
 //                                pb.setVisibility(View.INVISIBLE);
@@ -202,13 +206,13 @@ public class LiveListFragment extends Fragment {
                             } else {
                                 if (chatRooms.size() < pagesize) {
                                     hasMoreData = false;
-//                                    footLoadingLayout.setVisibility(View.VISIBLE);
-//                                    footLoadingPB.setVisibility(View.GONE);
-//                                    footLoadingText.setText(getResources().getString(R.string.no_more_messages));
+                                    footLoadingLayout.setVisibility(View.VISIBLE);
+                                    footLoadingPB.setVisibility(View.GONE);
+                                    footLoadingText.setText(getResources().getString(R.string.no_more_messages));
                                 }
                                 adapter.notifyDataSetChanged();
-                                isLoading = false;
                             }
+                            isLoading = false;
                         }
                     });
                 } catch (HyphenateException e) {
@@ -216,8 +220,10 @@ public class LiveListFragment extends Fragment {
                     getActivity().runOnUiThread(new Runnable() {
                         public void run() {
                             isLoading = false;
+                            mSrl.setRefreshing(false);
+                            mtvRefresh.setVisibility(View.GONE);
 //                            pb.setVisibility(View.INVISIBLE);
-//                            footLoadingLayout.setVisibility(View.GONE);
+                           footLoadingLayout.setVisibility(View.GONE);
                             Toast.makeText(getContext(), getResources().getString(R.string.failed_to_load_data), Toast.LENGTH_SHORT).show();
                         }
                     });
