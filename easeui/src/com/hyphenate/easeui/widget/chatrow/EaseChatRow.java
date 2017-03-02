@@ -11,7 +11,7 @@ import com.hyphenate.easeui.R;
 import com.hyphenate.easeui.adapter.EaseMessageAdapter;
 import com.hyphenate.easeui.utils.EaseUserUtils;
 import com.hyphenate.easeui.widget.EaseChatMessageList;
-import com.hyphenate.easeui.widget.EaseChatMessageList.MessageListItemClickListener;
+
 import com.hyphenate.util.DateUtils;
 
 import android.app.Activity;
@@ -50,7 +50,7 @@ public abstract class EaseChatRow extends LinearLayout {
     protected EMCallBack messageSendCallback;
     protected EMCallBack messageReceiveCallback;
 
-    protected MessageListItemClickListener itemClickListener;
+    protected EaseChatMessageList.MessageListItemClickListener itemClickListener;
 
     public EaseChatRow(Context context, EMMessage message, int position, BaseAdapter adapter) {
         super(context);

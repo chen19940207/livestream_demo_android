@@ -2,8 +2,6 @@ package com.hyphenate.easeui.domain;
 
 import java.util.List;
 
-import com.hyphenate.easeui.domain.EaseEmojicon.Type;
-
 /**
  * 一组表情所对应的实体类
  *
@@ -31,7 +29,7 @@ public class EaseEmojiconGroupEntity {
     public EaseEmojiconGroupEntity(int icon, List<EaseEmojicon> emojiconList){
         this.icon = icon;
         this.emojiconList = emojiconList;
-        type = Type.NORMAL;
+        type = EaseEmojicon.Type.NORMAL;
     }
     
     public EaseEmojiconGroupEntity(int icon, List<EaseEmojicon> emojiconList, EaseEmojicon.Type type){

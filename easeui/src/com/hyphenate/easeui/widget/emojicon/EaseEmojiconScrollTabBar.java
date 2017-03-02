@@ -6,7 +6,6 @@ import java.util.List;
 import com.hyphenate.easeui.R;
 import com.hyphenate.util.DensityUtil;
 
-import android.R.integer;
 import android.content.Context;
 import android.support.v4.view.ViewCompat;
 import android.util.AttributeSet;

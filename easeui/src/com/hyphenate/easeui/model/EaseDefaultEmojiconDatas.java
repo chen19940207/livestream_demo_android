@@ -2,7 +2,6 @@ package com.hyphenate.easeui.model;
 
 import com.hyphenate.easeui.R;
 import com.hyphenate.easeui.domain.EaseEmojicon;
-import com.hyphenate.easeui.domain.EaseEmojicon.Type;
 import com.hyphenate.easeui.utils.EaseSmileUtils;
 
 public class EaseDefaultEmojiconDatas {
@@ -90,7 +89,7 @@ public class EaseDefaultEmojiconDatas {
     private static EaseEmojicon[] createData(){
         EaseEmojicon[] datas = new EaseEmojicon[icons.length];
         for(int i = 0; i < icons.length; i++){
-            datas[i] = new EaseEmojicon(icons[i], emojis[i], Type.NORMAL);
+            datas[i] = new EaseEmojicon(icons[i], emojis[i], EaseEmojicon.Type.NORMAL);
         }
         return datas;
     }

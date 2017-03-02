@@ -16,7 +16,6 @@ import com.hyphenate.easeui.R;
 import com.hyphenate.easeui.adapter.EmojiconGridAdapter;
 import com.hyphenate.easeui.adapter.EmojiconPagerAdapter;
 import com.hyphenate.easeui.domain.EaseEmojicon;
-import com.hyphenate.easeui.domain.EaseEmojicon.Type;
 import com.hyphenate.easeui.domain.EaseEmojiconGroupEntity;
 import com.hyphenate.easeui.utils.EaseSmileUtils;
 
@@ -110,8 +109,8 @@ public class EaseEmojiconPagerView extends ViewPager{
         List<EaseEmojicon> emojiconList = groupEntity.getEmojiconList();
         int itemSize = emojiconColumns * emojiconRows -1;
         int totalSize = emojiconList.size();
-        Type emojiType = groupEntity.getType();
-        if(emojiType == Type.BIG_EXPRESSION){
+        EaseEmojicon.Type emojiType = groupEntity.getType();
+        if(emojiType == EaseEmojicon.Type.BIG_EXPRESSION){
             itemSize = bigEmojiconColumns * bigEmojiconRows;
         }
         int pageSize = totalSize % itemSize == 0 ? totalSize/itemSize : totalSize/itemSize + 1;   
@@ -119,7 +118,7 @@ public class EaseEmojiconPagerView extends ViewPager{
         for(int i = 0; i < pageSize; i++){
             View view = View.inflate(context, R.layout.ease_expression_gridview, null);
             GridView gv = (GridView) view.findViewById(R.id.gridview);
-            if(emojiType == Type.BIG_EXPRESSION){
+            if(emojiType == EaseEmojicon.Type.BIG_EXPRESSION){
                 gv.setNumColumns(bigEmojiconColumns);
             }else{
                 gv.setNumColumns(emojiconColumns);
@@ -130,7 +129,7 @@ public class EaseEmojiconPagerView extends ViewPager{
             }else{
                 list.addAll(emojiconList.subList(i * itemSize, totalSize));
             }
-            if(emojiType != Type.BIG_EXPRESSION){
+            if(emojiType != EaseEmojicon.Type.BIG_EXPRESSION){
                 EaseEmojicon deleteIcon = new EaseEmojicon();
                 deleteIcon.setEmojiText(EaseSmileUtils.DELETE_KEY);
                 list.add(deleteIcon);
@@ -201,8 +200,8 @@ public class EaseEmojiconPagerView extends ViewPager{
         List<EaseEmojicon> emojiconList = groupEntity.getEmojiconList();
         int itemSize = emojiconColumns * emojiconRows -1;
         int totalSize = emojiconList.size();
-        Type emojiType = groupEntity.getType();
-        if(emojiType == Type.BIG_EXPRESSION){
+        EaseEmojicon.Type emojiType = groupEntity.getType();
+        if(emojiType == EaseEmojicon.Type.BIG_EXPRESSION){
             itemSize = bigEmojiconColumns * bigEmojiconRows;
         }
         int pageSize = totalSize % itemSize == 0 ? totalSize/itemSize : totalSize/itemSize + 1;   

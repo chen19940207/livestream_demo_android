@@ -22,13 +22,11 @@ import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.ListView;
 
-import com.hyphenate.chat.EMChatManager;
 import com.hyphenate.chat.EMClient;
 import com.hyphenate.chat.EMConversation;
 import com.hyphenate.chat.EMMessage;
 import com.hyphenate.easeui.EaseConstant;
 import com.hyphenate.easeui.utils.EaseCommonUtils;
-import com.hyphenate.easeui.widget.EaseChatMessageList.MessageListItemClickListener;
 import com.hyphenate.easeui.widget.chatrow.EaseChatRow;
 import com.hyphenate.easeui.widget.chatrow.EaseChatRowBigExpression;
 import com.hyphenate.easeui.widget.chatrow.EaseChatRowFile;
@@ -38,6 +36,7 @@ import com.hyphenate.easeui.widget.chatrow.EaseChatRowText;
 import com.hyphenate.easeui.widget.chatrow.EaseChatRowVideo;
 import com.hyphenate.easeui.widget.chatrow.EaseChatRowVoice;
 import com.hyphenate.easeui.widget.chatrow.EaseCustomChatRowProvider;
+import com.hyphenate.easeui.widget.EaseChatMessageList;
 
 public class EaseMessageAdapter extends BaseAdapter{
 
@@ -73,7 +72,7 @@ public class EaseMessageAdapter extends BaseAdapter{
 	
     private String toChatUsername;
 
-    private MessageListItemClickListener itemClickListener;
+    private EaseChatMessageList.MessageListItemClickListener itemClickListener;
     private EaseCustomChatRowProvider customRowProvider;
     
     private boolean showUserNick;
@@ -294,7 +293,7 @@ public class EaseMessageAdapter extends BaseAdapter{
     }
 
 
-    public void setItemClickListener(MessageListItemClickListener listener){
+    public void setItemClickListener(EaseChatMessageList.MessageListItemClickListener listener){
 	    itemClickListener = listener;
 	}
 	

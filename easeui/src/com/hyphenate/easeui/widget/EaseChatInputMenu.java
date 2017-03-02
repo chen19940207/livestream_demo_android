@@ -18,7 +18,6 @@ import com.hyphenate.easeui.domain.EaseEmojicon;
 import com.hyphenate.easeui.domain.EaseEmojiconGroupEntity;
 import com.hyphenate.easeui.model.EaseDefaultEmojiconDatas;
 import com.hyphenate.easeui.utils.EaseSmileUtils;
-import com.hyphenate.easeui.widget.EaseChatExtendMenu.EaseChatExtendMenuItemClickListener;
 import com.hyphenate.easeui.widget.EaseChatPrimaryMenuBase.EaseChatPrimaryMenuListener;
 import com.hyphenate.easeui.widget.emojicon.EaseEmojiconMenu;
 import com.hyphenate.easeui.widget.emojicon.EaseEmojiconMenuBase;
@@ -152,7 +151,7 @@ public class EaseChatInputMenu extends LinearLayout {
      *            on click event of item
      */
     public void registerExtendMenuItem(String name, int drawableRes, int itemId,
-            EaseChatExtendMenuItemClickListener listener) {
+            EaseChatExtendMenu.EaseChatExtendMenuItemClickListener listener) {
         chatExtendMenu.registerMenuItem(name, drawableRes, itemId, listener);
     }
 
@@ -169,7 +168,7 @@ public class EaseChatInputMenu extends LinearLayout {
      *            on click event of item
      */
     public void registerExtendMenuItem(int nameRes, int drawableRes, int itemId,
-            EaseChatExtendMenuItemClickListener listener) {
+            EaseChatExtendMenu.EaseChatExtendMenuItemClickListener listener) {
         chatExtendMenu.registerMenuItem(nameRes, drawableRes, itemId, listener);
     }
 

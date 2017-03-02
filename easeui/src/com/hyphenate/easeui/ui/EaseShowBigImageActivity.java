@@ -30,7 +30,6 @@ import android.view.View.OnClickListener;
 import android.widget.ProgressBar;
 
 import com.hyphenate.EMCallBack;
-import com.hyphenate.chat.EMChatManager;
 import com.hyphenate.chat.EMClient;
 import com.hyphenate.easeui.R;
 import com.hyphenate.easeui.model.EaseImageCache;
@@ -38,7 +37,6 @@ import com.hyphenate.easeui.utils.EaseLoadLocalBigImgTask;
 import com.hyphenate.easeui.widget.photoview.EasePhotoView;
 import com.hyphenate.util.EMLog;
 import com.hyphenate.util.ImageUtils;
-import com.hyphenate.util.PathUtil;
 
 /**
  * download and show original image

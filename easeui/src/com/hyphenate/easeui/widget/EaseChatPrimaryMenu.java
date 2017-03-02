@@ -90,11 +90,11 @@ public class EaseChatPrimaryMenu extends EaseChatPrimaryMenuBase implements OnCl
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
                 if (!TextUtils.isEmpty(s)) {
-                    buttonMore.setVisibility(View.GONE);
-                    buttonSend.setVisibility(View.VISIBLE);
+                    buttonMore.setVisibility(GONE);
+                    buttonSend.setVisibility(VISIBLE);
                 } else {
-                    buttonMore.setVisibility(View.VISIBLE);
-                    buttonSend.setVisibility(View.GONE);
+                    buttonMore.setVisibility(VISIBLE);
+                    buttonSend.setVisibility(GONE);
                 }
             }
 
@@ -171,17 +171,17 @@ public class EaseChatPrimaryMenu extends EaseChatPrimaryMenuBase implements OnCl
             if(listener != null)
                 listener.onToggleVoiceBtnClicked();
         } else if (id == R.id.btn_more) {
-            buttonSetModeVoice.setVisibility(View.VISIBLE);
-            buttonSetModeKeyboard.setVisibility(View.GONE);
-            edittext_layout.setVisibility(View.VISIBLE);
-            buttonPressToSpeak.setVisibility(View.GONE);
+            buttonSetModeVoice.setVisibility(VISIBLE);
+            buttonSetModeKeyboard.setVisibility(GONE);
+            edittext_layout.setVisibility(VISIBLE);
+            buttonPressToSpeak.setVisibility(GONE);
             showNormalFaceImage();
             if(listener != null)
                 listener.onToggleExtendClicked();
         } else if (id == R.id.et_sendmessage) {
             edittext_layout.setBackgroundResource(R.drawable.ease_input_bar_bg_active);
-            faceNormal.setVisibility(View.VISIBLE);
-            faceChecked.setVisibility(View.INVISIBLE);
+            faceNormal.setVisibility(VISIBLE);
+            faceChecked.setVisibility(INVISIBLE);
             if(listener != null)
                 listener.onEditTextClicked();
         } else if (id == R.id.rl_face) {
@@ -200,14 +200,14 @@ public class EaseChatPrimaryMenu extends EaseChatPrimaryMenuBase implements OnCl
      */
     protected void setModeVoice() {
         hideKeyboard();
-        edittext_layout.setVisibility(View.GONE);
-        buttonSetModeVoice.setVisibility(View.GONE);
-        buttonSetModeKeyboard.setVisibility(View.VISIBLE);
-        buttonSend.setVisibility(View.GONE);
-        buttonMore.setVisibility(View.VISIBLE);
-        buttonPressToSpeak.setVisibility(View.VISIBLE);
-        faceNormal.setVisibility(View.VISIBLE);
-        faceChecked.setVisibility(View.INVISIBLE);
+        edittext_layout.setVisibility(GONE);
+        buttonSetModeVoice.setVisibility(GONE);
+        buttonSetModeKeyboard.setVisibility(VISIBLE);
+        buttonSend.setVisibility(GONE);
+        buttonMore.setVisibility(VISIBLE);
+        buttonPressToSpeak.setVisibility(VISIBLE);
+        faceNormal.setVisibility(VISIBLE);
+        faceChecked.setVisibility(INVISIBLE);
 
     }
 
@@ -215,26 +215,26 @@ public class EaseChatPrimaryMenu extends EaseChatPrimaryMenuBase implements OnCl
      * show keyboard
      */
     protected void setModeKeyboard() {
-        edittext_layout.setVisibility(View.VISIBLE);
-        buttonSetModeKeyboard.setVisibility(View.GONE);
-        buttonSetModeVoice.setVisibility(View.VISIBLE);
+        edittext_layout.setVisibility(VISIBLE);
+        buttonSetModeKeyboard.setVisibility(GONE);
+        buttonSetModeVoice.setVisibility(VISIBLE);
         // mEditTextContent.setVisibility(View.VISIBLE);
         editText.requestFocus();
         // buttonSend.setVisibility(View.VISIBLE);
-        buttonPressToSpeak.setVisibility(View.GONE);
+        buttonPressToSpeak.setVisibility(GONE);
         if (TextUtils.isEmpty(editText.getText())) {
-            buttonMore.setVisibility(View.VISIBLE);
-            buttonSend.setVisibility(View.GONE);
+            buttonMore.setVisibility(VISIBLE);
+            buttonSend.setVisibility(GONE);
         } else {
-            buttonMore.setVisibility(View.GONE);
-            buttonSend.setVisibility(View.VISIBLE);
+            buttonMore.setVisibility(GONE);
+            buttonSend.setVisibility(VISIBLE);
         }
 
     }
     
     
     protected void toggleFaceImage(){
-        if(faceNormal.getVisibility() == View.VISIBLE){
+        if(faceNormal.getVisibility() == VISIBLE){
             showSelectedFaceImage();
         }else{
             showNormalFaceImage();
@@ -242,13 +242,13 @@ public class EaseChatPrimaryMenu extends EaseChatPrimaryMenuBase implements OnCl
     }
     
     private void showNormalFaceImage(){
-        faceNormal.setVisibility(View.VISIBLE);
-        faceChecked.setVisibility(View.INVISIBLE);
+        faceNormal.setVisibility(VISIBLE);
+        faceChecked.setVisibility(INVISIBLE);
     }
     
     private void showSelectedFaceImage(){
-        faceNormal.setVisibility(View.INVISIBLE);
-        faceChecked.setVisibility(View.VISIBLE);
+        faceNormal.setVisibility(INVISIBLE);
+        faceChecked.setVisibility(VISIBLE);
     }
     
 

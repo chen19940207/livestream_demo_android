@@ -8,7 +8,6 @@ import com.hyphenate.util.EMLog;
 
 import android.content.Context;
 import android.graphics.drawable.AnimationDrawable;
-import android.view.View;
 import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -42,9 +41,9 @@ public class EaseChatRowVoice extends EaseChatRowFile{
         int len = voiceBody.getLength();
         if(len>0){
             voiceLengthView.setText(voiceBody.getLength() + "\"");
-            voiceLengthView.setVisibility(View.VISIBLE);
+            voiceLengthView.setVisibility(VISIBLE);
         }else{
-            voiceLengthView.setVisibility(View.INVISIBLE);
+            voiceLengthView.setVisibility(INVISIBLE);
         }
         if (EaseChatRowVoicePlayClickListener.playMsgId != null
                 && EaseChatRowVoicePlayClickListener.playMsgId.equals(message.getMsgId()) && EaseChatRowVoicePlayClickListener.isPlaying) {
@@ -67,17 +66,17 @@ public class EaseChatRowVoice extends EaseChatRowFile{
         if (message.direct() == EMMessage.Direct.RECEIVE) {
             if (message.isListened()) {
                 // hide the unread icon
-                readStatusView.setVisibility(View.INVISIBLE);
+                readStatusView.setVisibility(INVISIBLE);
             } else {
-                readStatusView.setVisibility(View.VISIBLE);
+                readStatusView.setVisibility(VISIBLE);
             }
             EMLog.d(TAG, "it is receive msg");
             if (voiceBody.downloadStatus() == EMFileMessageBody.EMDownloadStatus.DOWNLOADING ||
                     voiceBody.downloadStatus() == EMFileMessageBody.EMDownloadStatus.PENDING) {
-                progressBar.setVisibility(View.VISIBLE);
+                progressBar.setVisibility(VISIBLE);
                 setMessageReceiveCallback();
             } else {
-                progressBar.setVisibility(View.INVISIBLE);
+                progressBar.setVisibility(INVISIBLE);
 
             }
             return;

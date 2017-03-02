@@ -9,7 +9,6 @@ import android.content.res.TypedArray;
 import android.os.Build;
 import android.util.AttributeSet;
 import android.view.LayoutInflater;
-import android.view.View;
 
 import com.hyphenate.easeui.R;
 import com.hyphenate.easeui.domain.EaseEmojicon;
@@ -121,9 +120,9 @@ public class EaseEmojiconMenu extends EaseEmojiconMenuBase{
     
     public void setTabBarVisibility(boolean isVisible){
         if(!isVisible){
-            tabBar.setVisibility(View.GONE);
+            tabBar.setVisibility(GONE);
         }else{
-            tabBar.setVisibility(View.VISIBLE);
+            tabBar.setVisibility(VISIBLE);
         }
     }
 	

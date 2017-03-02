@@ -3,7 +3,6 @@ package com.hyphenate.easeui.widget.emojicon;
 import java.util.ArrayList;
 import java.util.List;
 
-import android.R.integer;
 import android.annotation.SuppressLint;
 import android.content.Context;
 import android.graphics.Bitmap;

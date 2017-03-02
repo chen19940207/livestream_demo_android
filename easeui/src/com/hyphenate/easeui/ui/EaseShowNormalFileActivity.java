@@ -5,7 +5,6 @@ import java.util.HashMap;
 import java.util.Map;
 
 import com.hyphenate.EMCallBack;
-import com.hyphenate.chat.EMChatManager;
 import com.hyphenate.chat.EMClient;
 import com.hyphenate.chat.EMFileMessageBody;
 import com.hyphenate.easeui.R;

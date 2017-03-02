@@ -15,11 +15,10 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Locale;
 
-import com.hyphenate.chat.EMChatManager;
 import com.hyphenate.chat.EMClient;
 import com.hyphenate.chat.EMMessage;
 import com.hyphenate.easeui.controller.EaseUI;
-import com.hyphenate.easeui.controller.EaseUI.EaseSettingsProvider;
+
 import com.hyphenate.util.EMLog;
 import com.hyphenate.util.EasyUtils;
 
@@ -122,7 +121,7 @@ public class EaseNotifier {
         if(EMClient.getInstance().chatManager().isSlientMessage(message)){
             return;
         }
-        EaseSettingsProvider settingsProvider = EaseUI.getInstance().getSettingsProvider();
+        EaseUI.EaseSettingsProvider settingsProvider = EaseUI.getInstance().getSettingsProvider();
         if(!settingsProvider.isMsgNotifyAllowed(message)){
             return;
         }
@@ -143,7 +142,7 @@ public class EaseNotifier {
         if(EMClient.getInstance().chatManager().isSlientMessage(messages.get(messages.size()-1))){
             return;
         }
-        EaseSettingsProvider settingsProvider = EaseUI.getInstance().getSettingsProvider();
+        EaseUI.EaseSettingsProvider settingsProvider = EaseUI.getInstance().getSettingsProvider();
         if(!settingsProvider.isMsgNotifyAllowed(null)){
             return;
         }
@@ -305,7 +304,7 @@ public class EaseNotifier {
                 EMLog.e(TAG, "in slient mode now");
                 return;
             }
-            EaseSettingsProvider settingsProvider = EaseUI.getInstance().getSettingsProvider();
+            EaseUI.EaseSettingsProvider settingsProvider = EaseUI.getInstance().getSettingsProvider();
             if(settingsProvider.isMsgVibrateAllowed(message)){
                 long[] pattern = new long[] { 0, 180, 80, 120 };
                 vibrator.vibrate(pattern, -1);

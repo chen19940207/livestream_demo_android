@@ -33,7 +33,6 @@ import android.content.Context;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.text.TextUtils;
-import android.util.Log;
 
 public class EaseCommonUtils {
 	private static final String TAG = "CommonUtils";
@@ -192,7 +191,7 @@ public class EaseCommonUtils {
         user.setInitialLetter(letter);
     }
 
-    //×Ô¼º·þÎñÆ÷Êý¾Ý
+    //ï¿½Ô¼ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
     public static void setAppUserInitialLetter(User user) {
         final String DefaultLetter = "#";
         String letter = DefaultLetter;
@@ -249,7 +248,7 @@ public class EaseCommonUtils {
 
     /**
      * \~chinese
-     * ÅÐ¶ÏÊÇ·ñÊÇÃâ´òÈÅµÄÏûÏ¢,Èç¹ûÊÇappÖÐÓ¦¸Ã²»Òª¸øÓÃ»§ÌáÊ¾ÐÂÏûÏ¢
+     * ï¿½Ð¶ï¿½ï¿½Ç·ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Åµï¿½ï¿½ï¿½Ï¢,ï¿½ï¿½ï¿½ï¿½ï¿½appï¿½ï¿½Ó¦ï¿½Ã²ï¿½Òªï¿½ï¿½ï¿½Ã»ï¿½ï¿½ï¿½Ê¾ï¿½ï¿½ï¿½ï¿½Ï¢
      * @param message
      * return
      *
