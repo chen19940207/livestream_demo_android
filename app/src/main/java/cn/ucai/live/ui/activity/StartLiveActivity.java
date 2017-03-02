@@ -114,10 +114,12 @@ public class StartLiveActivity extends LiveBaseActivity
         EaseUserUtils.setAppUserAvatar(StartLiveActivity.this, EMClient.getInstance().getCurrentUser(), eivAvatar);
         EaseUserUtils.setAppUserNick(EMClient.getInstance().getCurrentUser(), usernameView);
 
-        String id = getIntent().getStringExtra("liveId");
-        if (id != null && !id.equals("")) {
-            liveId = id;
-            chatroomId = id;
+//        String id = getIntent().getStringExtra("liveId");
+        LiveRoom liveRoom = getIntent().getParcelableExtra("liveroom");
+        if (liveRoom != null) {
+
+            liveId = liveRoom.getId();
+            chatroomId = liveRoom.getChatroomId();
 //                        initEnv();
         } else {
             liveId = EMClient.getInstance().getCurrentUser();
@@ -220,7 +222,7 @@ public class StartLiveActivity extends LiveBaseActivity
     void startLive() {
 
         //demo为了测试方便，只有指定的账号才能开启直播
-        if (liveId == null && liveId.equals("")) {
+        if (liveId == null || liveId.equals("")) {
             CommonUtils.showShortToast("获取直播数据失败!");
             pd = new ProgressDialog(StartLiveActivity.this);
             pd.setMessage("创建直播...");

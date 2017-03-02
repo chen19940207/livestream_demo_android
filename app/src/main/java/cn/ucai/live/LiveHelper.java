@@ -50,6 +50,7 @@ import java.util.UUID;
 import cn.ucai.live.data.NetDao;
 import cn.ucai.live.data.local.LiveDBManager;
 import cn.ucai.live.data.local.UserDao;
+import cn.ucai.live.data.model.Gift;
 import cn.ucai.live.data.model.Result;
 import cn.ucai.live.ui.activity.ChatActivity;
 import cn.ucai.live.ui.activity.MainActivity;
@@ -117,6 +118,7 @@ public class LiveHelper {
     private LocalBroadcastManager broadcastManager;
 
     private boolean isGroupAndContactListenerRegisted;
+    private Map<Integer, Gift> appGiftList;
 
     private LiveHelper() {
     }
@@ -158,8 +160,70 @@ public class LiveHelper {
             setGlobalListeners();
             broadcastManager = LocalBroadcastManager.getInstance(appContext);
             initDbDao();
+            initGiftList();
         }
     }
+
+    private void initGiftList() {
+        NetDao.loadAllGift(appContext, new OnCompleteListener<String>() {
+            @Override
+            public void onSuccess(String s) {
+                if (s != null) {
+                    Result result = ResultUtils.getListResultFromJson(s, Gift.class);
+                    if (result != null && result.isRetMsg()) {
+                        List<Gift> list = (List<Gift>) result.getRetData();
+                        if (list != null && list.size() > 0) {
+                            Map<Integer, Gift> giftlist = new HashMap<Integer, Gift>();
+                            for (Gift gift : list) {
+                                giftlist.put(gift.getId(), gift);
+                            }
+                            getAppGiftList().clear();
+                            getAppGiftList().putAll(giftlist);
+                            UserDao dao = new UserDao(appContext);
+                            List<Gift> gifts = new ArrayList<Gift>(giftlist.values());
+                            dao.saveAppGiftList(gifts);
+                        }
+                    }
+
+                }
+            }
+
+            @Override
+            public void onError(String error) {
+
+            }
+        });
+    }
+
+    public void setAppGiftList(Map<Integer, Gift> list) {
+        if (list == null) {
+            if (appGiftList != null) {
+                appGiftList.clear();
+            }
+            return;
+        }
+
+        appGiftList = list;
+    }
+
+    /**
+     * get contact list
+     *
+     * @return
+     */
+    public Map<Integer, Gift> getAppGiftList() {
+        if (appGiftList == null || appGiftList.size() == 0) {
+            appGiftList = demoModel.getAppGiftList();
+        }
+
+        // return a empty non-null object to avoid app crash
+        if (appGiftList == null) {
+            return new Hashtable<Integer, Gift>();
+        }
+
+        return appGiftList;
+    }
+
 
 
     private EMOptions initChatOptions() {
@@ -403,87 +467,88 @@ public class LiveHelper {
 
     }
 
-    /**
-     * group change listener
-     */
-    class MyGroupChangeListener implements EMGroupChangeListener {
+/**
+ * group change listener
+ */
+class MyGroupChangeListener implements EMGroupChangeListener {
 
-        @Override
-        public void onInvitationReceived(String s, String s1, String s2, String s3) {
+    @Override
+    public void onInvitationReceived(String s, String s1, String s2, String s3) {
 
-        }
-
-        @Override
-        public void onApplicationReceived(String s, String s1, String s2, String s3) {
-
-        }
-
-        @Override
-        public void onApplicationAccept(String s, String s1, String s2) {
-
-        }
-
-        @Override
-        public void onApplicationDeclined(String s, String s1, String s2, String s3) {
-
-        }
-
-        @Override
-        public void onInvitationAccpted(String s, String s1, String s2) {
-
-        }
-
-        @Override
-        public void onInvitationDeclined(String s, String s1, String s2) {
-
-        }
-
-        @Override
-        public void onUserRemoved(String s, String s1) {
-
-        }
-
-        @Override
-        public void onGroupDestroy(String s, String s1) {
-
-        }
-
-        @Override
-        public void onAutoAcceptInvitationFromGroup(String s, String s1, String s2) {
-
-        }
     }
 
-    /***
-     * 好友变化listener
-     */
-    public class MyContactListener implements EMContactListener {
+    @Override
+    public void onApplicationReceived(String s, String s1, String s2, String s3) {
 
-        @Override
-        public void onContactAdded(String s) {
-
-        }
-
-        @Override
-        public void onContactDeleted(String s) {
-
-        }
-
-        @Override
-        public void onContactInvited(String s, String s1) {
-
-        }
-
-        @Override
-        public void onContactAgreed(String s) {
-
-        }
-
-        @Override
-        public void onContactRefused(String s) {
-
-        }
     }
+
+    @Override
+    public void onApplicationAccept(String s, String s1, String s2) {
+
+    }
+
+    @Override
+    public void onApplicationDeclined(String s, String s1, String s2, String s3) {
+
+    }
+
+    @Override
+    public void onInvitationAccpted(String s, String s1, String s2) {
+
+    }
+
+    @Override
+    public void onInvitationDeclined(String s, String s1, String s2) {
+
+    }
+
+    @Override
+    public void onUserRemoved(String s, String s1) {
+
+    }
+
+    @Override
+    public void onGroupDestroy(String s, String s1) {
+
+    }
+
+    @Override
+    public void onAutoAcceptInvitationFromGroup(String s, String s1, String s2) {
+
+    }
+}
+
+/***
+ * 好友变化listener
+ */
+public class MyContactListener implements EMContactListener {
+
+    @Override
+    public void onContactAdded(String s) {
+
+    }
+
+    @Override
+    public void onContactDeleted(String s) {
+
+    }
+
+    @Override
+    public void onContactInvited(String s, String s1) {
+
+    }
+
+    @Override
+    public void onContactAgreed(String s) {
+
+    }
+
+    @Override
+    public void onContactRefused(String s) {
+
+    }
+
+}
 
     /**
      * user met some exception: conflict, removed or forbidden
@@ -1128,28 +1193,28 @@ public class LiveHelper {
     }
 
     public void asyncGetCurrentUserInfo(Activity activity) {
-                NetDao.getUserInfoByUsername(activity, EMClient.getInstance().getCurrentUser(), new OnCompleteListener<String>() {
-                        @Override
-                        public void onSuccess(String s) {
-                                L.e(TAG, "getUserInfoByUserName,s=" + s);
-                                if (s != null) {
-                                        Result result = ResultUtils.getResultFromJson(s, User.class);
-                                        if (result != null && result.isRetMsg()) {
-                                                User user = (User) result.getRetData();
-                                                if (user != null) {
-                                                        // save user info to db
-                                                                LiveHelper.getInstance().saveAppContact(user);
-                                                        PreferenceManager.getInstance().setCurrentUserNick(user.getMUserNick());
-                                                        PreferenceManager.getInstance().setCurrentUserAvatar(user.getAvatar());
-                                                    }
-                                            }
-                                    }
-                            }
-            
-                                @Override
-                        public void onError(String error) {
-                                L.e("UserProfileManager", "error=" + error);
-                            }
-                    });
+        NetDao.getUserInfoByUsername(activity, EMClient.getInstance().getCurrentUser(), new OnCompleteListener<String>() {
+            @Override
+            public void onSuccess(String s) {
+                L.e(TAG, "getUserInfoByUserName,s=" + s);
+                if (s != null) {
+                    Result result = ResultUtils.getResultFromJson(s, User.class);
+                    if (result != null && result.isRetMsg()) {
+                        User user = (User) result.getRetData();
+                        if (user != null) {
+                            // save user info to db
+                            LiveHelper.getInstance().saveAppContact(user);
+                            PreferenceManager.getInstance().setCurrentUserNick(user.getMUserNick());
+                            PreferenceManager.getInstance().setCurrentUserAvatar(user.getAvatar());
+                        }
+                    }
+                }
             }
+
+            @Override
+            public void onError(String error) {
+                L.e("UserProfileManager", "error=" + error);
+            }
+        });
+    }
 }

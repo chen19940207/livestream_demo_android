@@ -16,6 +16,7 @@ import java.util.Map;
 
 import cn.ucai.live.LiveApplication;
 import cn.ucai.live.LiveConstants;
+import cn.ucai.live.data.model.Gift;
 
 
 public class LiveDBManager {
@@ -275,6 +276,43 @@ public class LiveDBManager {
         if (db.isOpen()) {
             db.replace(UserDao.USER_TABLE_NAME, null, values);
         }
+    }
+
+    public void saveAppGiftList(List<Gift> giftList) {
+        SQLiteDatabase db = dbHelper.getWritableDatabase();
+        if (db.isOpen()) {
+            db.delete(UserDao.GIFT_TABLE_NAME, null, null);
+            for (Gift gift : giftList) {
+                ContentValues values = new ContentValues();
+                if (gift.getId() != null)
+                    values.put(UserDao.GIFT_COLUMN_ID, gift.getId());
+                if (gift.getGname() != null)
+                    values.put(UserDao.GIFT_COLUMN_NAME, gift.getGname());
+                if (gift.getGurl() != null)
+                    values.put(UserDao.GIFT_COLUMN_URL, gift.getGurl());
+                if (gift.getGprice() != null)
+                    values.put(UserDao.GIFT_COLUMN_PRICE, gift.getGprice());
+                db.replace(UserDao.GIFT_TABLE_NAME, null, values);
+            }
+        }
+    }
+
+    public Map<Integer, Gift> getAppGiftList() {
+        SQLiteDatabase db = dbHelper.getReadableDatabase();
+        Map<Integer, Gift> gifts = new Hashtable<Integer, Gift>();
+        if (db.isOpen()) {
+            Cursor cursor = db.rawQuery("select * from " + UserDao.GIFT_TABLE_NAME /*  " desc" */, null);
+            while (cursor.moveToNext()) {
+                Gift gift = new Gift();
+                gift.setId(cursor.getInt(cursor.getColumnIndex(UserDao.GIFT_COLUMN_ID)));
+                gift.setGname(cursor.getString(cursor.getColumnIndex(UserDao.GIFT_COLUMN_NAME)));
+                gift.setGprice(cursor.getInt(cursor.getColumnIndex(UserDao.GIFT_COLUMN_PRICE)));
+                gift.setGurl(cursor.getString(cursor.getColumnIndex(UserDao.GIFT_COLUMN_URL)));
+                gifts.put(gift.getId(), gift);
+            }
+            cursor.close();
+        }
+        return gifts;
     }
 
 }

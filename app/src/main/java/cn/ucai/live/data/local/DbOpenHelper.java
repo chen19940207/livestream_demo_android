@@ -52,6 +52,14 @@ public class DbOpenHelper extends SQLiteOpenHelper {
             + UserDao.USER_COLUMN_AVATAR_TYPE + " INTEGER, "
             + UserDao.USER_COLUMN_AVATAR_UPDATE_TIME + " TEXT);";
 
+    private static final String GIFT_TABLE_CREATE = "CREATE TABLE "
+                        + UserDao.GIFT_TABLE_NAME + " ("
+                        + UserDao.GIFT_COLUMN_NAME + " TEXT, "
+                        + UserDao.GIFT_COLUMN_URL + " TEXT, "
+                        + UserDao.GIFT_COLUMN_PRICE + " INTEGER, "
+                        + UserDao.GIFT_COLUMN_ID + " INTEGER PRIMARY KEY);";
+
+
     public static DbOpenHelper getInstance(Context context) {
         if (instance == null) {
             instance = new DbOpenHelper(context.getApplicationContext());
