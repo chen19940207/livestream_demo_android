@@ -1,85 +1,83 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#88000000"
-    >
+    android:orientation="vertical">
 
   <LinearLayout
       android:layout_width="match_parent"
       android:layout_height="match_parent"
       android:layout_weight="1"
-      android:orientation="vertical"
       android:gravity="center_horizontal"
-      >
+      android:orientation="vertical">
+
     <com.hyphenate.easeui.widget.EaseImageView
+        android:id="@+id/finish_eiv_avatar"
         android:layout_width="60dp"
         android:layout_height="60dp"
-        android:src="@drawable/ease_default_avatar"
         android:layout_marginTop="100dp"
-        />
+        android:src="@drawable/ease_default_avatar" />
+
     <TextView
-        android:id="@+id/tv_username"
+        android:id="@+id/finish_tv_username"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
         android:text="username"
         android:textColor="@color/common_white"
-        android:textSize="18sp"
-        android:layout_marginTop="10dp"
-        />
+        android:textSize="18sp" />
 
 
     <TextView
-        android:layout_marginTop="26dp"
         style="@style/LiveEndTitleStyle"
-        android:text="直播时间"
-        />
+        android:layout_marginTop="26dp"
+        android:text="直播时间" />
+
     <TextView
+        android:id="@+id/finish_show_time"
         style="@style/LiveEndTextStyle"
-        android:text="32:21"
         android:layout_marginTop="5dp"
-        />
+        android:text="32:21" />
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="20dp"
-        android:gravity="center_horizontal"
-        >
+        android:gravity="center_horizontal">
+
       <LinearLayout
           android:layout_width="wrap_content"
           android:layout_height="wrap_content"
-          android:orientation="vertical"
-          >
+          android:orientation="vertical">
+
         <TextView
             style="@style/LiveEndTitleStyle"
-            android:text="观看人数"
             android:layout_marginTop="2dp"
-            />
+            android:text="观看人数" />
+
         <TextView
             style="@style/LiveEndTextStyle"
             android:layout_marginTop="5dp"
-            android:text="2342"
-            />
+            android:text="2342" />
       </LinearLayout>
+
       <LinearLayout
           android:id="@+id/like_container"
           android:layout_width="wrap_content"
           android:layout_height="wrap_content"
-          android:orientation="vertical"
           android:layout_marginLeft="100dp"
-          >
+          android:orientation="vertical">
+
         <TextView
             style="@style/LiveEndTitleStyle"
-            android:text="喜欢"
             android:layout_marginTop="2dp"
-            />
+            android:text="喜欢" />
+
         <TextView
             style="@style/LiveEndTextStyle"
             android:layout_marginTop="5dp"
-            android:text="8312"
-            />
+            android:text="8312" />
       </LinearLayout>
 
     </LinearLayout>
@@ -91,12 +89,11 @@
       android:id="@+id/live_close_confirm"
       android:layout_width="match_parent"
       android:layout_height="@dimen/button_normal_height"
-      android:text="确认"
-      android:textSize="18sp"
-      android:textColor="@color/common_white"
-      android:background="@drawable/common_black_btn_bg"
       android:layout_weight="0"
-      />
+      android:background="@drawable/common_black_btn_bg"
+      android:text="确认"
+      android:textColor="@color/common_white"
+      android:textSize="18sp" />
 
 
 </LinearLayout>
