@@ -19,7 +19,7 @@
             <android.support.v7.widget.RecyclerView
                 android:id="@+id/recycleview"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
+                android:layout_height="wrap_content"
                 android:orientation="vertical"
                 app:layoutManager="android.support.v7.widget.GridLayoutManager"
                 app:spanCount="2" />
@@ -29,7 +29,7 @@
     <LinearLayout
         android:id="@+id/loading_layout"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="wrap_content"
         android:background="#E8E7E5"
         android:gravity="center">
 

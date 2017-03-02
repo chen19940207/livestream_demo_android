@@ -1,6 +1,7 @@
 package cn.ucai.live.ui.activity;
 
 import android.app.ProgressDialog;
+import android.content.Context;
 import android.media.AudioManager;
 import android.os.Bundle;
 import android.os.Handler;
@@ -114,18 +115,19 @@ public class StartLiveActivity extends LiveBaseActivity
                 if (id != null && !id.equals("")) {
                         liveId = id;
                         chatroomId = id;
-                        initEnv();
+//                        initEnv();
                     } else {
-                        pd = new ProgressDialog(StartLiveActivity.this);
-                        pd.setMessage("创建直播...");
-                        pd.show();
-                        createLive();
+                    liveId = EMClient.getInstance().getCurrentUser();
+//                        pd = new ProgressDialog(StartLiveActivity.this);
+//                        pd.setMessage("创建直播...");
+//                        pd.show();
+//                        createLive();
                     }
 
 //        liveId = TestDataRepository.getLiveRoomId(EMClient.getInstance().getCurrentUser());
 //        chatroomId = TestDataRepository.getChatRoomId(EMClient.getInstance().getCurrentUser());
 //        anchorId = EMClient.getInstance().getCurrentUser();
-        usernameView.setText(anchorId);
+//        usernameView.setText(anchorId);
         initEnv();
     }
 
@@ -212,13 +214,13 @@ public class StartLiveActivity extends LiveBaseActivity
      */
     @OnClick(R.id.btn_start)
     void startLive() {
-        pd = new ProgressDialog(StartLiveActivity.this);
-        pd.setMessage("创建直播...");
-        pd.show();
-        createLive();
+//        pd = new ProgressDialog(StartLiveActivity.this);
+//        pd.setMessage("创建直播...");
+//        pd.show();
+//        createLive();
         //demo为了测试方便，只有指定的账号才能开启直播
-        if (liveId == null || liveId.equals("")) {
-                       CommonUtils.showShortToast("获取直播数据失败!");
+        if (liveId == null && liveId.equals("")) {
+            CommonUtils.showShortToast("获取直播数据失败!");
 //            String[] anchorIds = TestDataRepository.anchorIds;
 //            StringBuilder sb = new StringBuilder();
 //            for (int i = 0; i < anchorIds.length; i++) {
@@ -227,9 +229,13 @@ public class StartLiveActivity extends LiveBaseActivity
 //            }
 //            new EaseAlertDialog(this, "demo中只有" + sb.toString() + "这几个账户才能开启直播").show();
             return;
+        } else {
+
+            startLiveByRoom();
         }
-        startLiveByRoom();
     }
+
+
 
     private void startLiveByRoom() {
         startContainer.setVisibility(View.INVISIBLE);
@@ -308,7 +314,7 @@ public class StartLiveActivity extends LiveBaseActivity
 
     @OnClick(R.id.img_bt_switch_voice)
     void toggleMicrophone() {
-        AudioManager audioManager = (AudioManager) getSystemService(AUDIO_SERVICE);
+        AudioManager audioManager = (AudioManager) getSystemService(Context.AUDIO_SERVICE);
         if (audioManager.isMicrophoneMute()) {
             audioManager.setMicrophoneMute(false);
             voiceSwitch.setSelected(false);
@@ -321,12 +327,13 @@ public class StartLiveActivity extends LiveBaseActivity
     private void showConfirmCloseLayout() {
         //显示封面
         coverImage.setVisibility(View.VISIBLE);
-        List<LiveRoom> liveRoomList = TestDataRepository.getLiveRoomList();
-        for (LiveRoom liveRoom : liveRoomList) {
-            if (liveRoom.getId().equals(liveId)) {
-                coverImage.setImageResource(liveRoom.getCover());
-            }
-        }
+        EaseUserUtils.setAppUserAvatar(StartLiveActivity.this, EMClient.getInstance().getCurrentUser(), coverImage);
+//        List<LiveRoom> liveRoomList = TestDataRepository.getLiveRoomList();
+//        for (LiveRoom liveRoom : liveRoomList) {
+//            if (liveRoom.getId().equals(liveId)) {
+//                coverImage.setImageResource(liveRoom.getCover());
+//            }
+//        }
         View view = liveEndLayout.inflate();
         Button closeConfirmBtn = (Button) view.findViewById(R.id.live_close_confirm);
         TextView usernameView = (TextView) view.findViewById(R.id.tv_username);

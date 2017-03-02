@@ -31,6 +31,7 @@ import com.hyphenate.EMChatRoomChangeListener;
 import com.hyphenate.chat.EMChatRoom;
 import com.hyphenate.chat.EMClient;
 import com.hyphenate.chat.EMCursorResult;
+import com.hyphenate.easeui.utils.EaseUserUtils;
 import com.hyphenate.exceptions.HyphenateException;
 
 import cn.ucai.live.R;
@@ -64,6 +65,7 @@ public class LiveListFragment extends Fragment {
     private EditText etSearch;
     private ImageButton ibClean;
     private List<EMChatRoom> rooms;
+
     RecyclerView recyclerView;
     GridLayoutManager gm;
     SwipeRefreshLayout mSrl;
@@ -83,15 +85,24 @@ public class LiveListFragment extends Fragment {
         rooms = new ArrayList<EMChatRoom>();
         new LiveAdapter(getActivity(), getLiveRoomList(chatRoomList));
 
+        mSrl = (SwipeRefreshLayout) getView().findViewById(R.id.srl);
+        mtvRefresh = (TextView) getView().findViewById(R.id.tv_refresh);
+        footLoadingLayout = (LinearLayout) getView().findViewById(R.id.loading_layout);
+        footLoadingPB = (ProgressBar) getView().findViewById(R.id.loading_bar);
+        footLoadingText = (TextView) getView().findViewById(R.id.loading_text);
+
+        footLoadingLayout.setVisibility(View.GONE);
+
         recyclerView = (RecyclerView) getView().findViewById(R.id.recycleview);
 //        GridLayoutManager glm = (GridLayoutManager) recyclerView.getLayoutManager();
 
         gm = new GridLayoutManager(getContext(), 2);
         recyclerView.setLayoutManager(gm);
+
         recyclerView.setHasFixedSize(true);
         recyclerView.addItemDecoration(new GridMarginDecoration(6));
-//        recyclerView = (RecyclerView) getView().findViewById(R.id.recycleview);
         recyclerView.setAdapter(adapter);
+//        recyclerView = (RecyclerView) getView().findViewById(R.id.recycleview);
 
         loadAndShowData();
         setListener();
@@ -146,6 +157,8 @@ public class LiveListFragment extends Fragment {
                 mSrl.setRefreshing(true);
                 mtvRefresh.setVisibility(View.VISIBLE);
                 cursor = null;
+                isLoading = true;
+                chatRoomList.clear();
                 loadAndShowData();
             }
         });
@@ -208,7 +221,7 @@ public class LiveListFragment extends Fragment {
                                     hasMoreData = false;
                                     footLoadingLayout.setVisibility(View.VISIBLE);
                                     footLoadingPB.setVisibility(View.GONE);
-                                    footLoadingText.setText(getResources().getString(R.string.no_more_messages));
+                                    footLoadingText.setText("没有更多数据了...");
                                 }
                                 adapter.notifyDataSetChanged();
                             }
@@ -243,7 +256,7 @@ public class LiveListFragment extends Fragment {
             liveRoom.setAudienceNum(room.getAffiliationsCount());
             liveRoom.setId(room.getId());
             liveRoom.setChatroomId(room.getId());
-            liveRoom.setCover(R.drawable.test1);
+            liveRoom.setCover(EaseUserUtils.getAppUserInfo(room.getOwner()).getAvatar());
             liveRoom.setAnchorId(room.getOwner());
             roomList.add(liveRoom);
         }
