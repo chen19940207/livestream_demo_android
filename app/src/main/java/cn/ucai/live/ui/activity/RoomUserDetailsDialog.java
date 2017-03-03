@@ -14,6 +14,10 @@ import android.view.Window;
 import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.TextView;
+
+import com.hyphenate.easeui.utils.EaseUserUtils;
+import com.hyphenate.easeui.widget.EaseImageView;
+
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
@@ -28,6 +32,7 @@ public class RoomUserDetailsDialog extends DialogFragment {
   Unbinder unbinder;
   @BindView(R.id.tv_username) TextView usernameView;
   @BindView(R.id.btn_mentions) Button mentionBtn;
+  @BindView(R.id.dialog_user_avatar) EaseImageView mDialogUserAvatar;
 
   private String username;
 
@@ -39,49 +44,55 @@ public class RoomUserDetailsDialog extends DialogFragment {
     return dialog;
   }
 
-  @Nullable @Override public View onCreateView(LayoutInflater inflater, ViewGroup container,
-      Bundle savedInstanceState) {
+  @Nullable
+  @Override
+  public View onCreateView(LayoutInflater inflater, ViewGroup container,
+                           Bundle savedInstanceState) {
     View view = inflater.inflate(R.layout.fragment_room_user_details, container, false);
     unbinder = ButterKnife.bind(this, view);
     return view;
   }
 
-  @Override public void onActivityCreated(Bundle savedInstanceState) {
+  @Override
+  public void onActivityCreated(Bundle savedInstanceState) {
     super.onActivityCreated(savedInstanceState);
     if (getArguments() != null) {
       username = getArguments().getString("username");
     }
     if (username != null) {
       usernameView.setText(username);
+      EaseUserUtils.setAppUserAvatar(getContext(),username,mDialogUserAvatar);
     }
     mentionBtn.setText("@TA");
   }
 
-  @OnClick(R.id.btn_message) void onMessageBtnClick(){
+  @OnClick(R.id.btn_message)
+  void onMessageBtnClick() {
     ChatFragment fragment = ChatFragment.newInstance(username, false);
     dismiss();
     getActivity().getSupportFragmentManager().beginTransaction().addToBackStack(null).replace(R.id.message_container, fragment).commit();
   }
 
-  @OnClick(R.id.btn_mentions) void onMentionBtnClick(){
-    if(dialogListener != null){
+  @OnClick(R.id.btn_mentions)
+  void onMentionBtnClick() {
+    if (dialogListener != null) {
       dialogListener.onMentionClick(username);
     }
   }
 
-  @OnClick(R.id.btn_follow) void onFollowBtnClick(){
+  @OnClick(R.id.btn_follow)
+  void onFollowBtnClick() {
   }
 
   private UserDetailsDialogListener dialogListener;
 
-  public void setUserDetailsDialogListener(UserDetailsDialogListener dialogListener){
+  public void setUserDetailsDialogListener(UserDetailsDialogListener dialogListener) {
     this.dialogListener = dialogListener;
   }
 
-  interface UserDetailsDialogListener{
+  interface UserDetailsDialogListener {
     void onMentionClick(String username);
   }
-
 
 
   @Override
@@ -104,7 +115,8 @@ public class RoomUserDetailsDialog extends DialogFragment {
     return dialog;
   }
 
-  @Override public void onDestroyView() {
+  @Override
+  public void onDestroyView() {
     super.onDestroyView();
     unbinder.unbind();
   }
