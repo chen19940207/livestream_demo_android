@@ -2,6 +2,8 @@ package cn.ucai.live;
 
 public interface I {
 
+    String TYPE_GIFT = "cn.ucai.live.gift";
+
     public static interface User {
         String TABLE_NAME							=		"t_superwechat_user";
         String USER_NAME 							= 		"m_user_name";					//用户账号
@@ -233,4 +235,5 @@ public interface I {
     int REQUESTCODE_PICK = 1;
     int REQUESTCODE_CUTTING = 2;
     int REQUESTCODE_MEMBER = 3;
+    int GIFT_COLUMN_COUNT = 4;
 }
