@@ -13,7 +13,6 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.bumptech.glide.Glide;
 import com.github.florent37.viewanimator.AnimationListener;
 import com.github.florent37.viewanimator.ViewAnimator;
 import com.hyphenate.EMCallBack;
@@ -48,6 +47,8 @@ import cn.ucai.live.ui.widget.PeriscopeLayout;
 import cn.ucai.live.ui.widget.RoomMessagesView;
 import cn.ucai.live.utils.L;
 import cn.ucai.live.utils.Utils;
+
+import static com.hyphenate.easeui.utils.EaseUserUtils.getAppUserInfo;
 
 /**
  * Created by wei on 2016/6/12.
@@ -252,7 +253,7 @@ public abstract class LiveBaseActivity extends BaseActivity {
         if (username.equals(chatroomId)) {
           if (message.getBooleanAttribute(LiveConstants.EXTRA_IS_BARRAGE_MSG, false)) {
             barrageLayout.addBarrage(((EMTextMessageBody) message.getBody()).getMessage(),
-                    message.getFrom());
+                    message.getFrom(),message.getStringAttribute(I.User.NICK,message.getFrom()));
           }
           messageView.refreshSelectLast();
         } else {
@@ -302,9 +303,11 @@ public abstract class LiveBaseActivity extends BaseActivity {
         messageView.setMessageViewListener(new RoomMessagesView.MessageViewListener() {
           @Override public void onMessageSend(String content) {
             EMMessage message = EMMessage.createTxtSendMessage(content, chatroomId);
+            User user = EaseUserUtils.getAppUserInfo(EMClient.getInstance().getCurrentUser());
+            message.setAttribute(I.User.NICK,user.getMUserNick());
             if (messageView.isBarrageShow) {
               message.setAttribute(LiveConstants.EXTRA_IS_BARRAGE_MSG, true);
-              barrageLayout.addBarrage(content, EMClient.getInstance().getCurrentUser());
+              barrageLayout.addBarrage(content, EMClient.getInstance().getCurrentUser(),user.getMUserNick());
             }
             message.setChatType(EMMessage.ChatType.ChatRoom);
             EMClient.getInstance().chatManager().sendMessage(message);
@@ -441,7 +444,7 @@ public abstract class LiveBaseActivity extends BaseActivity {
   }
 
   @OnClick(R.id.present_image) void onPresentImageClick() {
-    User user = EaseUserUtils.getAppUserInfo(EMClient.getInstance().getCurrentUser());
+    User user = getAppUserInfo(EMClient.getInstance().getCurrentUser());
     L.e(TAG,"send present,user="+user);
     EMMessage message = EMMessage.createSendMessage(EMMessage.Type.CMD);
     message.setReceipt(chatroomId);
@@ -505,11 +508,6 @@ public abstract class LiveBaseActivity extends BaseActivity {
           showUserDetailsDialog(namelist.get(position));
         }
       });
-//      //暂时使用测试数据
-//      Glide.with(context)
-//              .load(avatarRepository.getAvatar())
-//              .placeholder(R.drawable.ease_default_avatar)
-//              .into(holder.Avatar);
       EaseUserUtils.setAppUserAvatar(context,namelist.get(position),holder.Avatar);
     }
 
