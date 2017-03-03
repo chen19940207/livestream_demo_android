@@ -1,5 +1,6 @@
 package cn.ucai.live.ui.activity;
 
+import android.content.Context;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.view.View;
@@ -9,12 +10,7 @@ import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
-import butterknife.BindView;
-import butterknife.ButterKnife;
-import butterknife.OnClick;
-import cn.ucai.live.data.model.LiveRoom;
 
-import cn.ucai.live.R;
 import com.hyphenate.EMValueCallBack;
 import com.hyphenate.chat.EMChatRoom;
 import com.hyphenate.chat.EMClient;
@@ -22,7 +18,14 @@ import com.hyphenate.easeui.controller.EaseUI;
 import com.hyphenate.easeui.utils.EaseUserUtils;
 import com.ucloud.common.logger.L;
 import com.ucloud.player.widget.v2.UVideoView;
+
 import java.util.Random;
+
+import butterknife.BindView;
+import butterknife.ButterKnife;
+import butterknife.OnClick;
+import cn.ucai.live.R;
+import cn.ucai.live.data.model.LiveRoom;
 
 public class LiveDetailsActivity extends LiveBaseActivity implements UVideoView.Callback {
 
@@ -41,14 +44,15 @@ public class LiveDetailsActivity extends LiveBaseActivity implements UVideoView.
         ButterKnife.bind(this);
 
 
-        InputMethodManager imm = (InputMethodManager) getSystemService(INPUT_METHOD_SERVICE);
+        InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
         imm.toggleSoftInput(0, InputMethodManager.HIDE_NOT_ALWAYS);
 
         LiveRoom liveRoom = getIntent().getParcelableExtra("liveroom");
-        liveId = liveRoom.getAnchorId();
+        liveId = liveRoom.getId();
         chatroomId = liveRoom.getChatroomId();
         String coverRes = liveRoom.getCover();
-        EaseUserUtils.setAppUserAvatar(LiveDetailsActivity.this, liveRoom.getAnchorId(), coverView);
+        EaseUserUtils.setAppUserAvatar(LiveDetailsActivity.this,liveRoom.getAnchorId(),coverView);
+//        coverView.setImageResource(coverRes);
 
         anchorId = liveRoom.getAnchorId();
         usernameView.setText(anchorId);

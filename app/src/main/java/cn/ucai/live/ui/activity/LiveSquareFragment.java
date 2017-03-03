@@ -12,12 +12,14 @@ import android.support.v7.widget.Toolbar;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+
+import java.util.ArrayList;
+import java.util.List;
+
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.Unbinder;
 import cn.ucai.live.R;
-import java.util.ArrayList;
-import java.util.List;
 
 /**
  * Created by wei on 2016/5/27.
@@ -57,8 +59,7 @@ public class LiveSquareFragment extends Fragment{
     private void setupViewPager(){
         Adapter adapter = new Adapter(getActivity().getSupportFragmentManager());
         adapter.addFragment(new LiveListFragment(), "热门");
-        adapter.addFragment(new LiveListFragment(), "女神");
-        adapter.addFragment(new LiveListFragment(), "男神");
+        adapter.addFragment(new LiveListFragment(), "最新");
         viewPager.setAdapter(adapter);
     }
 

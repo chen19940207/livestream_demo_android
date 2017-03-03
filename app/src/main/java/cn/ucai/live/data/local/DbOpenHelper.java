@@ -1,10 +1,10 @@
 /**
  * Copyright (C) 2016 Hyphenate Inc. All rights reserved.
- * <p>
+ *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- * http://www.apache.org/licenses/LICENSE-2.0
+ *     http://www.apache.org/licenses/LICENSE-2.0
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
@@ -20,7 +20,7 @@ import android.database.sqlite.SQLiteOpenHelper;
 import cn.ucai.live.LiveHelper;
 
 
-public class DbOpenHelper extends SQLiteOpenHelper {
+public class DbOpenHelper extends SQLiteOpenHelper{
 
     private static final int DATABASE_VERSION = 1;
     private static DbOpenHelper instance;
@@ -36,29 +36,28 @@ public class DbOpenHelper extends SQLiteOpenHelper {
             + UserDao.COLUMN_NAME_DISABLED_GROUPS + " TEXT, "
             + UserDao.COLUMN_NAME_DISABLED_IDS + " TEXT);";
 
-    private DbOpenHelper(Context context) {
-        super(context, getUserDatabaseName(), null, DATABASE_VERSION);
-    }
-
-    // 本地数据库
     private static final String USER_TABLE_CREATE = "CREATE TABLE "
             + UserDao.USER_TABLE_NAME + " ("
             + UserDao.USER_COLUMN_NAME + " TEXT PRIMARY KEY, "
             + UserDao.USER_COLUMN_NAME_NICK + " TEXT, "
-            + UserDao.USER_COLUMN_AVATAR_ID + " INTEGER, "
-            + UserDao.USER_COLUMN_AVATAR_NAME + " TEXT, "
-            + UserDao.USER_COLUMN_AVATAR_SUFFIX + " TEXT, "
-            + UserDao.USER_COLUMN_AVATAR_PATH + " TEXT, "
-            + UserDao.USER_COLUMN_AVATAR_TYPE + " INTEGER, "
-            + UserDao.USER_COLUMN_AVATAR_UPDATE_TIME + " TEXT);";
+            + UserDao.USER_COLUMN_NAME_AVATAR_ID + " INTEGER, "
+            + UserDao.USER_COLUMN_NAME_AVATAR_NAME + " TEXT,"
+            + UserDao.USER_COLUMN_NAME_AVATAR_SUFFIX + " TEXT,"
+            + UserDao.USER_COLUMN_NAME_AVATAR_PATH + " TEXT,"
+            + UserDao.USER_COLUMN_NAME_AVATAR_TYPE + " INTEGER,"
+            + UserDao.USER_COLUMN_NAME_AVATAR_UPDATE_TIME + " TEXT);";
+
 
     private static final String GIFT_TABLE_CREATE = "CREATE TABLE "
-                        + UserDao.GIFT_TABLE_NAME + " ("
-                        + UserDao.GIFT_COLUMN_NAME + " TEXT, "
-                        + UserDao.GIFT_COLUMN_URL + " TEXT, "
-                        + UserDao.GIFT_COLUMN_PRICE + " INTEGER, "
-                        + UserDao.GIFT_COLUMN_ID + " INTEGER PRIMARY KEY);";
+            + UserDao.GIFT_TABLE_NAME + " ("
+            + UserDao.GIFT_COLUMN_NAME + " TEXT, "
+            + UserDao.GIFT_COLUMN_URL + " TEXT, "
+            + UserDao.GIFT_COLUMN_PRICE + " INTEGER, "
+            + UserDao.GIFT_COLUMN_ID + " INTEGER PRIMARY KEY);";
 
+    private DbOpenHelper(Context context) {
+        super(context, getUserDatabaseName(), null, DATABASE_VERSION);
+    }
 
     public static DbOpenHelper getInstance(Context context) {
         if (instance == null) {
@@ -68,7 +67,7 @@ public class DbOpenHelper extends SQLiteOpenHelper {
     }
 
     private static String getUserDatabaseName() {
-        return LiveHelper.getInstance().getCurrentUsernName() + "_demo.db";
+        return  LiveHelper.getInstance().getCurrentUsernName() + "_demo.db";
     }
 
     @Override
@@ -76,6 +75,7 @@ public class DbOpenHelper extends SQLiteOpenHelper {
         db.execSQL(USERNAME_TABLE_CREATE);
         db.execSQL(CREATE_PREF_TABLE);
         db.execSQL(USER_TABLE_CREATE);
+        db.execSQL(GIFT_TABLE_CREATE);
     }
 
     @Override

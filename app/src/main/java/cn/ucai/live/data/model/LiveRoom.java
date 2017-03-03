@@ -62,13 +62,11 @@ public class LiveRoom implements Parcelable {
         this.anchorId = anchorId;
     }
 
-    @Override
-    public int describeContents() {
+    @Override public int describeContents() {
         return 0;
     }
 
-    @Override
-    public void writeToParcel(Parcel dest, int flags) {
+    @Override public void writeToParcel(Parcel dest, int flags) {
         dest.writeString(this.id);
         dest.writeString(this.name);
         dest.writeInt(this.audienceNum);
@@ -98,4 +96,16 @@ public class LiveRoom implements Parcelable {
             return new LiveRoom[size];
         }
     };
+
+    @Override
+    public String toString() {
+        return "LiveRoom{" +
+                "id='" + id + '\'' +
+                ", name='" + name + '\'' +
+                ", audienceNum=" + audienceNum +
+                ", cover=" + cover +
+                ", chatroomId='" + chatroomId + '\'' +
+                ", anchorId='" + anchorId + '\'' +
+                '}';
+    }
 }

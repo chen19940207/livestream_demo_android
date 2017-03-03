@@ -13,16 +13,14 @@ import java.util.Map;
 
 import cn.ucai.live.data.local.UserDao;
 import cn.ucai.live.data.model.Gift;
-import cn.ucai.live.utils.L;
 import cn.ucai.live.utils.PreferenceManager;
-
 
 public class LiveModel {
     UserDao dao = null;
     protected Context context = null;
-    protected Map<Key, Object> valueCache = new HashMap<Key, Object>();
+    protected Map<Key,Object> valueCache = new HashMap<Key,Object>();
 
-    public LiveModel(Context ctx) {
+    public LiveModel(Context ctx){
         context = ctx;
         PreferenceManager.init(context);
     }
@@ -38,21 +36,20 @@ public class LiveModel {
         return dao.getContactList();
     }
 
-    public void saveContact(EaseUser user) {
+    public void saveContact(EaseUser user){
         UserDao dao = new UserDao(context);
         dao.saveContact(user);
     }
 
     /**
      * save current username
-     *
      * @param username
      */
-    public void setCurrentUserName(String username) {
+    public void setCurrentUserName(String username){
         PreferenceManager.getInstance().setCurrentUserName(username);
     }
 
-    public String getCurrentUsernName() {
+    public String getCurrentUsernName(){
         return PreferenceManager.getInstance().getCurrentUsername();
     }
 
@@ -64,12 +61,12 @@ public class LiveModel {
     public boolean getSettingMsgNotification() {
         Object val = valueCache.get(Key.VibrateAndPlayToneOn);
 
-        if (val == null) {
+        if(val == null){
             val = PreferenceManager.getInstance().getSettingMsgNotification();
             valueCache.put(Key.VibrateAndPlayToneOn, val);
         }
 
-        return (Boolean) (val != null ? val : true);
+        return (Boolean) (val != null?val:true);
     }
 
     public void setSettingMsgSound(boolean paramBoolean) {
@@ -80,12 +77,12 @@ public class LiveModel {
     public boolean getSettingMsgSound() {
         Object val = valueCache.get(Key.PlayToneOn);
 
-        if (val == null) {
+        if(val == null){
             val = PreferenceManager.getInstance().getSettingMsgSound();
             valueCache.put(Key.PlayToneOn, val);
         }
 
-        return (Boolean) (val != null ? val : true);
+        return (Boolean) (val != null?val:true);
     }
 
     public void setSettingMsgVibrate(boolean paramBoolean) {
@@ -96,12 +93,12 @@ public class LiveModel {
     public boolean getSettingMsgVibrate() {
         Object val = valueCache.get(Key.VibrateOn);
 
-        if (val == null) {
+        if(val == null){
             val = PreferenceManager.getInstance().getSettingMsgVibrate();
             valueCache.put(Key.VibrateOn, val);
         }
 
-        return (Boolean) (val != null ? val : true);
+        return (Boolean) (val != null?val:true);
     }
 
     public void setSettingMsgSpeaker(boolean paramBoolean) {
@@ -112,24 +109,24 @@ public class LiveModel {
     public boolean getSettingMsgSpeaker() {
         Object val = valueCache.get(Key.SpakerOn);
 
-        if (val == null) {
+        if(val == null){
             val = PreferenceManager.getInstance().getSettingMsgSpeaker();
             valueCache.put(Key.SpakerOn, val);
         }
 
-        return (Boolean) (val != null ? val : true);
+        return (Boolean) (val != null?val:true);
     }
 
 
-    public void setDisabledGroups(List<String> groups) {
-        if (dao == null) {
+    public void setDisabledGroups(List<String> groups){
+        if(dao == null){
             dao = new UserDao(context);
         }
 
         List<String> list = new ArrayList<String>();
         list.addAll(groups);
-        for (int i = 0; i < list.size(); i++) {
-            if (EaseAtMessageHelper.get().getAtMeGroups().contains(list.get(i))) {
+        for(int i = 0; i < list.size(); i++){
+            if(EaseAtMessageHelper.get().getAtMeGroups().contains(list.get(i))){
                 list.remove(i);
                 i--;
             }
@@ -139,14 +136,14 @@ public class LiveModel {
         valueCache.put(Key.DisabledGroups, list);
     }
 
-    public List<String> getDisabledGroups() {
+    public List<String> getDisabledGroups(){
         Object val = valueCache.get(Key.DisabledGroups);
 
-        if (dao == null) {
+        if(dao == null){
             dao = new UserDao(context);
         }
 
-        if (val == null) {
+        if(val == null){
             val = dao.getDisabledGroups();
             valueCache.put(Key.DisabledGroups, val);
         }
@@ -155,8 +152,8 @@ public class LiveModel {
         return (List<String>) val;
     }
 
-    public void setDisabledIds(List<String> ids) {
-        if (dao == null) {
+    public void setDisabledIds(List<String> ids){
+        if(dao == null){
             dao = new UserDao(context);
         }
 
@@ -164,14 +161,14 @@ public class LiveModel {
         valueCache.put(Key.DisabledIds, ids);
     }
 
-    public List<String> getDisabledIds() {
+    public List<String> getDisabledIds(){
         Object val = valueCache.get(Key.DisabledIds);
 
-        if (dao == null) {
+        if(dao == null){
             dao = new UserDao(context);
         }
 
-        if (val == null) {
+        if(val == null){
             val = dao.getDisabledIds();
             valueCache.put(Key.DisabledIds, val);
         }
@@ -180,35 +177,35 @@ public class LiveModel {
         return (List<String>) val;
     }
 
-    public void setGroupsSynced(boolean synced) {
+    public void setGroupsSynced(boolean synced){
         PreferenceManager.getInstance().setGroupsSynced(synced);
     }
 
-    public boolean isGroupsSynced() {
+    public boolean isGroupsSynced(){
         return PreferenceManager.getInstance().isGroupsSynced();
     }
 
-    public void setContactSynced(boolean synced) {
+    public void setContactSynced(boolean synced){
         PreferenceManager.getInstance().setContactSynced(synced);
     }
 
-    public boolean isContactSynced() {
+    public boolean isContactSynced(){
         return PreferenceManager.getInstance().isContactSynced();
     }
 
-    public void setBlacklistSynced(boolean synced) {
+    public void setBlacklistSynced(boolean synced){
         PreferenceManager.getInstance().setBlacklistSynced(synced);
     }
 
-    public boolean isBacklistSynced() {
+    public boolean isBacklistSynced(){
         return PreferenceManager.getInstance().isBacklistSynced();
     }
 
-    public void allowChatroomOwnerLeave(boolean value) {
+    public void allowChatroomOwnerLeave(boolean value){
         PreferenceManager.getInstance().setSettingAllowChatroomOwnerLeave(value);
     }
 
-    public boolean isChatroomOwnerLeaveAllowed() {
+    public boolean isChatroomOwnerLeaveAllowed(){
         return PreferenceManager.getInstance().getSettingAllowChatroomOwnerLeave();
     }
 
@@ -245,27 +242,27 @@ public class LiveModel {
         return PreferenceManager.getInstance().isPushCall();
     }
 
-    public void setRestServer(String restServer) {
+    public void setRestServer(String restServer){
         PreferenceManager.getInstance().setRestServer(restServer);
     }
 
-    public String getRestServer() {
-        return PreferenceManager.getInstance().getRestServer();
+    public String getRestServer(){
+        return  PreferenceManager.getInstance().getRestServer();
     }
 
-    public void setIMServer(String imServer) {
+    public void setIMServer(String imServer){
         PreferenceManager.getInstance().setIMServer(imServer);
     }
 
-    public String getIMServer() {
+    public String getIMServer(){
         return PreferenceManager.getInstance().getIMServer();
     }
 
-    public void enableCustomServer(boolean enable) {
+    public void enableCustomServer(boolean enable){
         PreferenceManager.getInstance().enableCustomServer(enable);
     }
 
-    public boolean isCustomServerEnable() {
+    public boolean isCustomServerEnable(){
         return PreferenceManager.getInstance().isCustomServerEnable();
     }
 
@@ -285,7 +282,7 @@ public class LiveModel {
         return PreferenceManager.getInstance().getCustomAppkey();
     }
 
-    enum Key {
+    enum Key{
         VibrateAndPlayToneOn,
         VibrateOn,
         PlayToneOn,
@@ -294,9 +291,7 @@ public class LiveModel {
         DisabledIds
     }
 
-    // 保存到自己的数据库
     public boolean saveAppContactList(List<User> contactList) {
-        L.e("main", "saveAppContactList" + contactList);
         UserDao dao = new UserDao(context);
         dao.saveAppContactList(contactList);
         return true;
@@ -307,19 +302,19 @@ public class LiveModel {
         return dao.getAppContactList();
     }
 
-    public void saveAppContact(User user) {
+    public void saveAppContact(User user){
         UserDao dao = new UserDao(context);
         dao.saveAppContact(user);
     }
+
     public boolean saveAppGiftList(List<Gift> giftList) {
-                L.e("main", "saveAppContactList"+  giftList);
-                UserDao dao = new UserDao(context);
-                dao.saveAppGiftList(giftList);
-                return true;
-            }
-    
-                public Map<Integer,Gift> getAppGiftList() {
-                UserDao dao = new UserDao(context);
-                return dao.getAppGiftList();
-            }
+        UserDao dao = new UserDao(context);
+        dao.saveAppGiftList(giftList);
+        return true;
+    }
+
+    public Map<Integer, Gift> getAppGiftList() {
+        UserDao dao = new UserDao(context);
+        return dao.getAppGiftList();
+    }
 }
