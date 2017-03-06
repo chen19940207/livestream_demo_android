@@ -80,23 +80,23 @@ public class MyProfileFragment extends Fragment {
     @OnClick(R.id.btn_logout)
     void onLogout() {
         LiveHelper.getInstance().logout(false, new EMCallBack() {
-                        @Override
-                        public void onSuccess() {
-                                getActivity().finish();
-                                MFGT.gotoLoginCleanTask(getActivity());
+            @Override
+            public void onSuccess() {
+                getActivity().finish();
+                MFGT.gotoLoginCleanTask(getActivity());
                 //                startActivity(new Intent(getActivity(), LoginActivity.class));
-                                    }
-            
-                                @Override
-                        public void onError(int i, String s) {
-                
-                                    }
-            
-                                @Override
-                        public void onProgress(int i, String s) {
-                
-                                    }
-                    });
+            }
+
+            @Override
+            public void onError(int i, String s) {
+
+            }
+
+            @Override
+            public void onProgress(int i, String s) {
+
+            }
+        });
         EMClient.getInstance().logout(false, new EMCallBack() {
             @Override
             public void onSuccess() {
@@ -137,5 +137,10 @@ public class MyProfileFragment extends Fragment {
     public void onDestroyView() {
         super.onDestroyView();
         unbinder.unbind();
+    }
+
+    @OnClick(R.id.layout_change)
+    public void myChange(){
+        MFGT.gotoChange(getActivity());
     }
 }

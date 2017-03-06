@@ -45,6 +45,7 @@ public class PreferenceManager {
     private static String SHARED_KEY_CURRENTUSER_NICK = "SHARED_KEY_CURRENTUSER_NICK";
     private static String SHARED_KEY_CURRENTUSER_AVATAR = "SHARED_KEY_CURRENTUSER_AVATAR";
     private static String SHARED_KEY_PAYMENT_TIP = "SHARED_KEY_PAYMENT_TIP";
+    private static String SHARED_KEY_CURRENTUSER_CHANGE = "SHARED_KEY_CURRENTUSER_CHANGE";
 
     private static String SHARED_KEY_REST_SERVER = "SHARED_KEY_REST_SERVER";
     private static String SHARED_KEY_IM_SERVER = "SHARED_KEY_IM_SERVER";
@@ -213,6 +214,14 @@ public class PreferenceManager {
     public boolean getPayMentTip() {
         return mSharedPreferences.getBoolean(SHARED_KEY_PAYMENT_TIP, false);
     }
+    public void setCurrentuserChange(int change) {
+        editor.putInt(SHARED_KEY_PAYMENT_TIP, change);
+        editor.apply();
+    }
+
+    public int getCurrentuserChange() {
+        return mSharedPreferences.getInt(SHARED_KEY_PAYMENT_TIP, 0);
+    }
 
     public String getCurrentUserNick() {
         return mSharedPreferences.getString(SHARED_KEY_CURRENTUSER_NICK, null);
@@ -280,6 +289,7 @@ public class PreferenceManager {
         editor.remove(SHARED_KEY_CURRENTUSER_NICK);
         editor.remove(SHARED_KEY_CURRENTUSER_AVATAR);
         editor.remove(SHARED_KEY_PAYMENT_TIP);
+        editor.remove(SHARED_KEY_CURRENTUSER_CHANGE);
         editor.apply();
     }
 
