@@ -203,4 +203,15 @@ public class NetDao {
                 .targetClass(String.class)
                 .execute(listener);
     }
+    public static void givindGift(Context context, String username,String anchor,int gifid,int count,
+                                  OnCompleteListener<String> listener){
+        OkHttpUtils<String> utils = new OkHttpUtils<>(context);
+        utils.setRequestUrl(I.REQUEST_GIVING_GIFT)
+                .addParam("uname", username)
+                .addParam("anchor", anchor)
+                .addParam("giftId", String.valueOf(gifid))
+                .addParam("giftNum", String.valueOf(count))
+                .targetClass(String.class)
+                .execute(listener);
+    }
 }
